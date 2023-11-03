@@ -1,0 +1,9 @@
+---
+               
+- hosts: ubuntu
+  gather_facts: yes
+  tasks :
+      - name: Print all available facts
+        #ansible.builtin.debug:
+        debug:
+             var: ansible_facts
