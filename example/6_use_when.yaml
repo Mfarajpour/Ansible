@@ -1,0 +1,16 @@
+---
+               
+- hosts: all
+  gather_facts: yes
+
+  tasks :
+          - name: Print all available facts
+            #ansible.builtin.debug:
+            debug:
+                  var: ansible_facts
+          - name: update package cache
+            become: yes
+            apt:
+                    update_cache: yes
+            when: 
+             - ansible_facts['distribution'] == "Ubuntu" 
