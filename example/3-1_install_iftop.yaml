@@ -1,0 +1,11 @@
+---
+
+- hosts: ubuntu
+  become: yes
+  gather_facts: no
+  tasks :
+          - name: "install iftop package"
+            apt:
+                     name: iftop
+                     state: present
+          
