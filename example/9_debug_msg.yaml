@@ -1,0 +1,12 @@
+---
+- hosts: all
+
+  vars:
+      text: "ubuntu"
+      
+  tasks:
+   - name: debug message
+     debug:
+       msg: "my os is {{ text }}"
+       
+  
