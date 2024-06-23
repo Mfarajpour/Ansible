@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: false
+  tasks:
+     - name: copy report.txt
+       copy:
+         src: ./report.txt
+         dest: /home/ubuntu/devops/report.txt
+         owner: ubuntu
+         mode: "0644"
