@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+     - name: change multi line in file 
+       blockinfile:
+          state: present
+          dest: /etc/hosts
+          content:
+             192.168.1.100 ansible ansible.example.com 
+
