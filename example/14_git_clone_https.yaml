@@ -1,0 +1,15 @@
+--- 
+- hosts: all
+  become: yes
+  
+  tasks:
+    - name: ensure git install
+      apt:
+
+         name: git
+         state: present
+           
+    - name: git clone https
+      git:
+        repo: "https://github.com/Mfarajpour/ssh-keygen.git"
+        dest: "/home/ubuntu/devops"
