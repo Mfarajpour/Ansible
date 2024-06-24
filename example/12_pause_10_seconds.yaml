@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    wait_seconds: 10
+  tasks:
+    - name: pause for 10 seconds
+      pause:
+        seconds: "{{ wait_seconds | int }}"  
+      
+    - name: message
+      debug:
+        msg: "The end"    
