@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars:
+     repo: "git@github.com:Mfarajpour/ssh-keygen.git"
+     dest: "/home/ubuntu/devops"
+     sshkey: "~/.ssh/id_ed25519"
+  tasks:
+    - name: ensure git install
+      become: true
+      apt:
+         name: git
+         state: present  
+         update_cache: true
+     
+    - name: git clone repo ssh
+      git:
+         repo: "{{ repo }}"    
+         dest: "{{ dest }}"
+         key_file: "{{ sshkey }}"
+        
