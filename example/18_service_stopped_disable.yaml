@@ -1,0 +1,17 @@
+---
+ - hosts: all
+   become: yes
+   vars:
+     services_on_boot:
+       - "nginx.service"
+   tasks:
+     - name: populate service facts
+       service_facts:
+     
+     - name: enable service on boot
+       service:
+         name: "{{ item }}"
+         enabled: false
+         state: stopped
+       when: "item in services"
+       with_items:  "{{ services_on_boot }}"

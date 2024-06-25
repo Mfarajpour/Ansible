@@ -1,0 +1,11 @@
+---
+ - hosts: all
+   become: yes
+   
+   tasks:
+     - name: sshd restart
+       service:
+         name: sshd
+         state: restarted
+         enabled: true
+       
