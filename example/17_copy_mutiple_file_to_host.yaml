@@ -1,0 +1,13 @@
+---
+ - hosts: all
+   become: false
+   
+   tasks:
+     - name: copy multiple files
+       copy:
+          src: "{{ item }}"
+          dest: "/home/ubuntu/devops"   
+          owner: ubuntu
+          mode: "0644"
+       with_fileglob:
+         - "examples/*.txt"   
