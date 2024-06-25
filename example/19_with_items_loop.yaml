@@ -1,0 +1,23 @@
+---
+- hosts: all
+  gather_facts: no
+
+  vars:
+       docker_packages_to_remove:
+          - docker.io
+          - docker-doc 
+          - docker-compose
+          - docker-compose-v2 
+          - podman-docker
+          - containerd
+          - runc     
+  tasks:  
+    - name: uninstall old docker packages
+      become: yes
+      apt:
+         name: "{{ item }}" 
+         state: absent 
+      with_items: "{{ docker_packages_to_remove }}"   
+         
+    
+          
