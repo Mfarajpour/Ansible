@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: yes
+        
+  tasks:  
+    - name: check docker installation
+      shell: "which docker"
+      ignore_errors: yes
+      register: result
+       
+    - name: exit if docker installed
+      meta: end_host
+      when: result.rc == 0  
+      
+           
+       
