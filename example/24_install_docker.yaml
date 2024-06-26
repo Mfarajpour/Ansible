@@ -1,0 +1,77 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  vars:
+       docker_packages_to_remove:
+          - docker.io
+          - docker-doc 
+          - docker-compose
+          - docker-compose-v2 
+          - podman-docker
+          - containerd
+          - runc   
+       
+       docker_prequired_packages_to_install:
+          - ca-certificates 
+          - curl     
+          
+       docker_packages_install:   
+           - docker-ce
+           - docker-ce-cli
+           - containerd.io
+           - docker-buildx-plugin
+           - docker-compose-plugin  
+          
+  tasks:  
+    
+      
+      
+    - name: uninstall old docker packages
+      become: yes
+      apt:
+         name: "{{ item }}"
+         state: absent 
+      with_items: "{{ docker_packages_to_remove }}"    
+
+   
+    - name: update package cache
+      become: yes
+      apt: 
+           update_cache: yes
+            
+    - name: install docker prequired packages
+      become: yes
+      apt:
+         name: "{{ item }}" 
+         state: present 
+      with_items: "{{ docker_prequired_packages_to_install }}"   
+      
+      
+    - name: install docker apt repository key
+      become: yes
+      apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg
+         state: present
+         
+    - name: add docker apt repository
+      become: yes
+      apt_repository: 
+         repo: deb [arch = "{{ 'amd64' if ansible_facts['architecture'] == 'x86_64' else 'i386' }}" ] https://download.docker.com/linux/ubuntu {{ ansible_facts.distribution_release }} stable
+         state: present 
+         
+         
+    - name: update packages 
+      become: yes
+      apt: 
+           update_cache: yes   
+           
+           
+    - name: install docker 
+      become: yes
+      apt:
+         name: "{{ item }}" 
+         state: present 
+      with_items: "{{ docker_packages_install }}"       
+           
+       
