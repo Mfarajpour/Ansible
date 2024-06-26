@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+          
+  tasks: 
+    - name: run nginx container 
+      become: yes
+      community.docker.docker_container:
+        name: nginx
+        image: nginx:alpine
+        
+    
