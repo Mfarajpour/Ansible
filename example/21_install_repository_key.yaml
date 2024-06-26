@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: no
+
+  
+          
+  tasks:  
+    
+    - name: install docker apt repository key
+      become: yes
+      apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg
+         state: present
+         
+  
+     
+       
