@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: no
+  vars_files:
+    - cred.yaml
+  
+  tasks:
+    - name: run mysql
+      become: yes
+      community.docker.docker_container:
+          name: mysql
+          image: mysql:8
+          ports:
+           - "3306:3306"
+          env:
+            MYSQL_ROOT_PASSWORD: "{{ vault_MYSQL_ROOT_PASSWORD }}"
+            MYSQL_DATABASE: "{{ vault_MYSQL_DATABASE }}"
+            MYSQL_USER: "{{ vault_MYSQL_USER }}"
+            MYSQL_PASSWORD: "{{ vault_MYSQL_PASSWORD }}"
+    
