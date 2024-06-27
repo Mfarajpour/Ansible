@@ -1,0 +1,5 @@
+---
+ - name: find docker
+   shell: "which docker"
+   ignore_errors: yes
+   register: docker

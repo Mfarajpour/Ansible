@@ -1,0 +1,11 @@
+---
+ - hosts: all
+   become: yes
+   tasks:
+      - name: include docker task
+        include_tasks: test.yaml
+       
+      - name: print docker output
+        debug:
+          var: docker
+            
