@@ -1,0 +1,14 @@
+---
+ - hosts: all
+   become: yes
+   tasks:
+      - name: install packages
+        include_tasks: test.yaml
+        with_items:
+          - nano
+          - wget
+          
+      - name: print docker output
+        debug:
+          var: docker
+            
