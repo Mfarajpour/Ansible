@@ -1,0 +1,19 @@
+---
+# tasks file for webserver
+   
+- name: install nginx
+  apt: 
+    name: nginx
+    
+- name: copy nginx config
+  copy:
+      src: nginx.conf
+      dest: /etc/nginx/nginx.conf
+      
+  notify: restart nginx
+     
+- name: copy index template
+  template:
+     src: index.html.j2
+     dest: /usr/share/nginx/html/index.html
+
